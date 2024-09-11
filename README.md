@@ -1,104 +1,84 @@
-![logo](https://user-images.githubusercontent.com/44912347/202244850-18dbf275-11cf-44b5-9500-b2fcb5d44d05.jpg)
+![logo](https://user-images.githubusercontent.com/44912347/202273653-1c259f67-7b01-46fc-8e4d-ccb804649e27.jpg)
 
-# Classy Coders Inc. 👩‍💻
+# Destination OOP 🛫
+As you arrive at the airport, your excitement grows. You're not just going on a trip, but embarking on an adventure into the world of Object-Oriented Programming. Your destination? Creating classes and unit tests for airports, persons, planes, and bags.
 
-In a tech-driven world, the importance of skilled employees cannot be overstated. Enter "Classy Coders Inc", a software development company on a mission to revolutionize the way businesses operate. As a budding developer, you've just landed a job at this esteemed establishment and are tasked with creating a series of classes that represents employees at the company and will underlie the systems they are building.
+In this activity, you'll be practicing object-oriented programming (OOP) by creating classes with attributes and methods that model real-world entities. Additionally, you'll also be writing unit tests to ensure that they're functioning as expected. By the end of this activity, you'll have not only a solid understanding of OOP principles but also a set of classes that you can use to build more complex programs in the future. So let's get ready to take off and start coding!
 
-They have provided you with the following class diagram that represents their current workforce.
+![OOP Airport Class Diagram](./assets/OOPClass.png)
 
-![Classy Coders Inc Class Diagram](./assets/EmployeeClassDiagram.png)
+**GOAL**: You should:
+- Write tests for each class in the corresponding test file in the `__test__` folder (e.g. Bag tests should be written in Bag.test.js)
+- Create code that meets the design specifications outlined in the class diagram above and the more detailed specs outlined below.
+- Feel free to try your code out by importing classes in `main.js` and creating some instances in the `main()` function.
 
-## `Employee`
+## `Bag`
 
-Create a class `Employee` that has the following properties and methods:
-- `name`: A string representing the name of the employee.
-- `position`: A string representing the position of the employee.
-- `salary`: A *private* number representing the salary of the employee.
-- `isHired`: A *private* field that initializes with a value of `true`.
-- `getSalary()`: A method that returns the `salary` of the employee.
-- `setSalary(amount)`: A method that updates the `salary` of the employee.
-- `getStatus()`: A method that returns the value of `isHired`.
-- `setStatus(command)`: A method that updates `isHired` to:
-    - `true` if `command` is `"hire"`
-    - `false` if `command` is `"fire"`
+1. In `Bag.test.js`, import the `Bag` class from `Bag.js` (it has already been exported for you).
+2. In `Bag.test.js`, construct the tests that will verify that you have included all of the required components outlined in the class diagram above. A few to consider using:
+    - Test that you can create an instance of the `Bag` class
+    - Test that the `weight` and `id` have been assigned correctly.
+    - `owner`: The person assigned to a `Bag`. Initialized with a value of `null`.
+    - Verify you can get the initial `owner` using `getOwner`.
+    - Create a test to update `owner` with a `Person` assigned to a `Bag` using `assignOwner()`. You won't be able to assign a person until you completing the next section.
+3. In `Bag.js`, create code that meets the following specifications:
+    - **Properties**
+        - `weight`: The weight of the bag.
+        - `id`: An id for the bag.
+    - **Methods**
+        - `getOwner()`: Returns the `Person` assigned to the bag.
+        - `assignOwner(person)` Updates `owner` with a `person` assigned to a `Bag`.
+4. Verify your tests work by running `npm test ./__tests__/classes/Bag.test.js`. 
 
-### Examples
-```javascript
-const preston = new Employee("Preston", "Engineer", 100000);
-preston.getSalary(); // 100000
-preston.setSalary(105000);
-preston.getSalary(); // 105000
-preston.getStatus(); // true;
-preston.setStatus("fire");
-preston.getStatus(); // false;
-```
+## `Person`
 
-## `Manager`
+1. In `Person.test.js`, import the `Person` class from `Person.js` that has been created for you.
+2. In `Person.test.js`, construct the tests that will verify that you have included all of the required components outlined in the class diagram above. A few to consider using:
+    - Test that you can create an instance of the `Person` class
+    - Test that the `name` and `destination` have been assigned correctly.
+    - Test that `bags` initializes as an empty array.
+    - Test that `addBags()` adds a bag to the `bags` array.
+3. In `Person.js`, create code that meets the following specifications:
+    - **Properties**
+        - `name`: The name of the person.
+        - `destination`: The destination the person is traveling to.
+        - `bags`: An array of `Bag` instances assigned to this person. This should initialize as an empty array.
+    - **Methods**
+        - `addBag(bag)`: Updates the `bags` array with a bag.
+        - `getBags()`: Returns the array of `bags.
+4. Verify your tests work by running `npm test ./__tests__/classes/Person.test.js`. 
 
-Create a subclass `Manager` that extends `Employee` (don't forget to import `Employee` to the `Manager.js` file!) and has the following additional property and methods:
-- `department`: A string representing the department the manager is in charge of.
-- `employeesManaged`: A *private* property that holds an array of `Employee` class instances the manager manages. Initializes as an empty array.
-- `getEmployeesManaged()`: A method that returns the employees a manager has.
-- `setEmployeesManaged(employee)`: A method that updates the `employeesManaged` with a new `Employee`
+## `Plane`
 
-### Examples
-```javascript
-const jenna = new Manager("Jenna", "Head of Engineers", 120000, "Software Engineering", 10);
-jenna.getEmployeesManaged(); // []
-const preston = new Employee("Preston", "Engineer", 100000);
-jenna.setEmployeesManaged(preston);
-jenna.getEmployeesManaged(); // [ Employee ]
-```
+1. In `Plane.test.js`, import the `Plane` class from `Plane.js` that has been created for you.
+2. In `Plane.test.js`, construct the tests that will verify that you have included all of the required components outlined in the class diagram above. A few to consider using:
+    - Test that `company`, `origin`, and `destination` are assigned to the correct value.
+    - Check that the `passengers` array initializes as an empty array.
+    - Verify that you can add a `Person` to the `passengers` array using `addPassenger`.
+3. In `Plane.js`, create code that meets the following specifications:
+    - **Properties**
+        - `company`: The company that operates the Plane.
+        - `origin`: The origin set to the static property of `Airport.airportCode` (created in the next section).
+        - `destination`: The destination the plane is traveling to.
+        - `passengers`: An array of `Passenger` instances assigned to this plane. This should initialize as an empty array.
+    - **Methods**
+        - `getPassengers()`: Returns the array of `passengers`.
+        - `addPassenger(passenger)`: Adds the `passenger` to the `passengers` array. 
+4. Verify your tests work by running `npm test ./__tests__/classes/Plane.test.js`. 
 
-## `SoftwareEngineer`
-
-Create a class of `SoftwareEngineer` that extends `Employee` and has the following additional properties and methods:
-- `programmingLanguages`: A *private* property that holds an array of programming languages the software engineer knows.
-- `getProgrammingLanguages()`: A method to return the `programmingLanguages` that the engineer knows.
-- `setProgrammingLanguage(language)`: A method to update the `programmingLanguages` with a new language to the array.
-
-### Examples
-```javascript
-const programmer = new SoftwareEngineer("Becca", "Senior Software Engineer", 100000, ["JavaScript", "Java", "Python"]);
-programmer.getProgrammingLanguages(); // ["JavaScript", "Java", "Python"]
-programmer.setProgrammingLanguage("C#"); 
-programmer.getProgrammingLanguages(); // ["JavaScript", "Java", "Python", "C#"]
-```
-## `SalesPerson`
-
-Create a class of `SalesPerson` that extends `Employee` and has the following additional properties and methods:
-- `clients`: A property that holds an array of clients the salesperson manages.
-- `totalSales`: A private field that contains the value of total sales the employee has performed. Initializes with a value of 0.
-- `getSalesNumbers()`: A method that returns the `totalSales` for the salesperson.
-- `makeSale(amount)`: A method that updates the `totalSales` with the `amount`.
-
-### Examples
-
-```javascript
-const malik = new SalesPerson("Malik", "Enterprise Sale Associate", 90000, ["Vine", "MySpace", "Shutterfly"])
-malik.getSalesNumbers(); // 0
-malik.makeSale(10500);
-malik.makeSale(20000);
-malik.getSalesNumbers(); // 30500
-```
-
-## Updating `Employee` Class with Static Values
-- `allEmployees`: A **private** static private property that initializes as an empty array. Every time a new `Employee` is created they are added to the end of this array.
-- `getEmployees`: A static method that returns the array of `allEmployees`.
-- `getTotalPayroll()`: A static method that returns the total salaries of all employees that are stored in the `allEmployees` array.
-
-### Examples
-```javascript
-const jenna = new Manager("Jenna", "Head of Engineers", 120000, "Software Engineering", 10);
-const programmer = new SoftwareEngineer("Becca", "Senior Software Engineer", 100000, ["JavaScript", "Java", "Python"]);
-const malik = new SalesPerson("Malik", "Enterprise Sale Associate", 90000, ["Vine", "MySpace", "Shutterfly"])
-
-Employees.getEmployees(); // [ Manager { }, SoftwareEngineer { }, SalesPerson { }]
-Employees.getTotalSalary(); // 310000
-```
-
-## Stretch: Go Above and Beyond 🚀
-1. **Error Handling**: Add error handling to the `setSalary` method of the Employee class. If the salary is less than `0`, throw an error with the message `"Salary cannot be negative"`.
-2. **Search**: Create a `findClient(client)` method for the `SalesPerson` class. It should return the client that matches the argument provided.
-3. **Promotions**: Add a `promote` method to the `Employee` class. This method should take in a new job title as an argument and update the employee's job title and salary accordingly. Implement this method in the `Manager` subclasses as well, as they may have additional promotion criteria.
-4. **Performance Metrics**: Add performance metrics to the `Employee` class. Each employee should have a set of metrics such as sales numbers for salespeople, project completion rate for software engineers, and employee retention rate for managers. Implement a method to calculate and return the performance score based on these metrics. Design a method that use this score to determine bonuses and/or promotions.
+## `Airport`
+1. In `Airport.test.js`, import the `Airport` class from `Airport.js` that has been created for you.
+2. In `Airport.test.js`, construct the tests that will verify that you have included all of the required components outlined in the class diagram above. A few to consider using:
+    - Test that `name` and `planes` are assigned to the correct value.
+    - Test that `airportCode` is the correct value
+    - Check that the `planes` array initializes as an empty array.
+    - Verify that you can add `Plane` objects to the planes array using `addPlane`.
+3. In `Plane.js`, create code that meets the following specifications:
+    - **Properties**
+        - `name`: The name of the Airport.
+        - `airportCode`: A static property with the three letter code for the airport (e.g. JFK or LHR).
+        - `planes`: An array of `Plane` objects currently at the airport. Initializes as an empty array.
+    - **Methods**
+        - `getPlanes()`: Returns the array of `planes`.
+        - `addPlane(plane)`: Adds the `plane` to the `planes` array. 
+4. Verify your tests work by running `npm test ./__tests__/classes/Airport.test.js`. 
